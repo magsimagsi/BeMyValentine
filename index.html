@@ -304,6 +304,97 @@
             margin-top: 20px;
         }
         
+        /* Notification Modal Styles */
+        .notification-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .notification-content {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            animation: modalFadeIn 0.5s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .notification-content h2 {
+            color: #ff4081;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+        
+        .notification-content p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+        
+        .notification-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .notification-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .notification-send {
+            background: linear-gradient(to right, #36d1dc, #5b86e5);
+            color: white;
+        }
+        
+        .notification-cancel {
+            background: #f0f0f0;
+            color: #555;
+        }
+        
+        .notification-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .confirmation-message {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            border-left: 4px solid #4caf50;
+        }
+        
+        .confirmation-message.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
         /* Mobile responsiveness */
         @media (max-width: 768px) {
             .header h1 {
@@ -334,6 +425,14 @@
                 max-width: 250px;
                 justify-content: center;
             }
+            
+            .notification-content {
+                padding: 30px 20px;
+            }
+            
+            .notification-buttons {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
@@ -347,8 +446,13 @@
         
         <div class="content">
             <div class="question">
-                <p> Will you be my Valentine Mal?</p>
-             </div>
+                <p>Will you be my Valentine Mal?</p>
+            </div>
+            
+            <div class="confirmation-message" id="confirmationMessage">
+                <i class="fas fa-check-circle" style="color: #4caf50; margin-right: 10px;"></i>
+                <strong>Confirmation sent!</strong> I'll be notified when you accept my Valentine's proposal. ❤️
+            </div>
                                 
             <div class="buttons">
                 <button class="btn yes-btn" id="yesBtn">
@@ -384,7 +488,7 @@
                     </div>
                     <div class="event-detail">
                         <i class="fas fa-sticky-note"></i>
-                        <strong>Notes:</strong> Dress code: It doesn’t matter what you wear, you're always beautiful in my eyes.
+                        <strong>Notes:</strong> Dress code: It doesn't matter what you wear, you're always beautiful in my eyes.
                     </div>
                 </div>
                 
@@ -418,6 +522,23 @@
         </div>
     </div>
 
+    <!-- Notification Modal -->
+    <div class="notification-modal" id="notificationModal">
+        <div class="notification-content">
+            <h2><i class="fas fa-bell"></i> Send Confirmation</h2>
+            <p>Would you like me to receive a notification that you've accepted my Valentine's proposal?</p>
+            <p><strong>Mal has accepted your Valentine's proposal!</strong></p>
+            <div class="notification-buttons">
+                <button class="notification-btn notification-send" id="sendNotificationBtn">
+                    <i class="fas fa-paper-plane"></i> Yes, notify me!
+                </button>
+                <button class="notification-btn notification-cancel" id="cancelNotificationBtn">
+                    <i class="fas fa-times"></i> Not now
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Get DOM elements
         const yesBtn = document.getElementById('yesBtn');
@@ -426,12 +547,19 @@
         const responseMessage = document.getElementById('responseMessage');
         const heartsContainer = document.getElementById('heartsContainer');
         const calendarSection = document.getElementById('calendarSection');
+        const notificationModal = document.getElementById('notificationModal');
+        const sendNotificationBtn = document.getElementById('sendNotificationBtn');
+        const cancelNotificationBtn = document.getElementById('cancelNotificationBtn');
+        const confirmationMessage = document.getElementById('confirmationMessage');
         
         // Calendar provider buttons
         const googleCalBtn = document.getElementById('googleCalBtn');
         const appleCalBtn = document.getElementById('appleCalBtn');
         const outlookCalBtn = document.getElementById('outlookCalBtn');
         const downloadCalBtn = document.getElementById('downloadCalBtn');
+        
+        // Store acceptance status
+        let acceptanceConfirmed = false;
         
         // Valentine's event details
         const eventDetails = {
@@ -515,26 +643,78 @@ END:VCALENDAR`;
             }, 3000);
         }
         
+        // Show notification modal
+        function showNotificationModal() {
+            notificationModal.style.display = 'flex';
+        }
+        
+        // Hide notification modal
+        function hideNotificationModal() {
+            notificationModal.style.display = 'none';
+        }
+        
+        // Send notification (simulated - in real app, this would call your backend)
+        function sendAcceptanceNotification() {
+            // In a real application, this would send data to your server
+            // For this demo, we'll simulate it with localStorage
+            
+            // Store acceptance in localStorage to simulate server storage
+            localStorage.setItem('valentineProposalAccepted', 'true');
+            localStorage.setItem('valentineAcceptanceTime', new Date().toISOString());
+            
+            // Show confirmation message
+            confirmationMessage.classList.add('show');
+            
+            // Log the acceptance (in real app, this would be a server call)
+            console.log('🎉 VALENTINE PROPOSAL ACCEPTED! 🎉');
+            console.log('Mal has accepted your Valentine proposal!');
+            console.log('Acceptance Time: ' + new Date().toLocaleString());
+            console.log('Event Date: February 14, 2025');
+            
+            // You would typically send this to your backend:
+            // fetch('/api/valentine-acceptance', {
+            //     method: 'POST',
+            //     headers: {'Content-Type': 'application/json'},
+            //     body: JSON.stringify({
+            //         accepted: true,
+            //         timestamp: new Date().toISOString(),
+            //         eventDate: eventDetails.startTime
+            //     })
+            // });
+            
+            // Show success message
+            alert('Thank you! I have been notified of your acceptance. Get ready for an unforgettable Valentine\'s Day! ❤️');
+        }
+        
         // Yes button click handler
         yesBtn.addEventListener('click', function() {
-            responseMessage.textContent = "Yay! Wala ng atrasan to! ❤️🎉";
-            responseMessage.classList.add('show');
-            
-            // Show calendar button and section
-            calendarBtn.style.display = 'inline-block';
-            calendarSection.classList.add('show');
-            
-            // Create floating hearts
-            createHearts(20);
-            
-            // Change button text
-            yesBtn.innerHTML = '<i class="fas fa-heart"></i> You said YES!';
-            yesBtn.disabled = true;
-            noBtn.style.display = 'none';
-            
-            // Add some celebration effects
-            document.querySelector('.header').style.background = 'linear-gradient(to right, #36d1dc, #5b86e5)';
-            document.querySelector('.question').style.color = '#36d1dc';
+            if (!acceptanceConfirmed) {
+                responseMessage.textContent = "Yay! Wala ng atrasan to! ❤️🎉";
+                responseMessage.classList.add('show');
+                
+                // Show calendar button and section
+                calendarBtn.style.display = 'inline-block';
+                calendarSection.classList.add('show');
+                
+                // Create floating hearts
+                createHearts(20);
+                
+                // Change button text
+                yesBtn.innerHTML = '<i class="fas fa-heart"></i> You said YES!';
+                yesBtn.disabled = true;
+                noBtn.style.display = 'none';
+                
+                // Add some celebration effects
+                document.querySelector('.header').style.background = 'linear-gradient(to right, #36d1dc, #5b86e5)';
+                document.querySelector('.question').style.color = '#36d1dc';
+                
+                // Show notification modal after a short delay
+                setTimeout(() => {
+                    showNotificationModal();
+                }, 1500);
+                
+                acceptanceConfirmed = true;
+            }
         });
         
         // No button click handler (with some fun interactivity)
@@ -560,6 +740,21 @@ END:VCALENDAR`;
             
             // Change the button text
             noBtn.textContent = "Are you sure?";
+        });
+        
+        // Send notification button
+        sendNotificationBtn.addEventListener('click', function() {
+            sendAcceptanceNotification();
+            hideNotificationModal();
+            
+            // Update response message
+            responseMessage.innerHTML = "Thank you for accepting! I'm so excited! 🥳❤️";
+        });
+        
+        // Cancel notification button
+        cancelNotificationBtn.addEventListener('click', function() {
+            hideNotificationModal();
+            responseMessage.innerHTML = "That's okay! Just knowing you said yes is enough for now! 😊❤️";
         });
         
         // Calendar button click handler
@@ -637,6 +832,20 @@ END:VCALENDAR`;
             document.querySelector('.event-detail:nth-child(2)').innerHTML = 
                 `<i class="fas fa-clock"></i>
                 <strong>Date & Time:</strong> February 14, ${valentinesYear} at 5:00 PM`;
+            
+            // Check if already accepted (from localStorage)
+            if (localStorage.getItem('valentineProposalAccepted') === 'true') {
+                // Show accepted state
+                yesBtn.innerHTML = '<i class="fas fa-heart"></i> Already Accepted!';
+                yesBtn.disabled = true;
+                noBtn.style.display = 'none';
+                calendarBtn.style.display = 'inline-block';
+                calendarSection.classList.add('show');
+                document.querySelector('.header').style.background = 'linear-gradient(to right, #36d1dc, #5b86e5)';
+                responseMessage.innerHTML = "You've already accepted! Can't wait for our date! ❤️";
+                responseMessage.classList.add('show');
+                acceptanceConfirmed = true;
+            }
         });
     </script>
 </body>
