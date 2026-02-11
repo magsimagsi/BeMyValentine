@@ -347,7 +347,7 @@
         
         <div class="content">
             <div class="question">
-                <p> Will you be my Valentine?</p>
+                <p> Will you be my Valentine Mal?</p>
              </div>
                                 
             <div class="buttons">
@@ -517,7 +517,7 @@ END:VCALENDAR`;
         
         // Yes button click handler
         yesBtn.addEventListener('click', function() {
-            responseMessage.textContent = "Yay! You've made me the happiest person! ❤️🎉";
+            responseMessage.textContent = "Yay! Wala ng atrasan to! ❤️🎉";
             responseMessage.classList.add('show');
             
             // Show calendar button and section
@@ -552,7 +552,7 @@ END:VCALENDAR`;
         });
         
         noBtn.addEventListener('click', function() {
-            responseMessage.textContent = "I'm not giving up that easily! 💪❤️";
+            responseMessage.textContent = "Please say Yes! 💪❤️";
             responseMessage.classList.add('show');
             
             // Create some hearts anyway
@@ -630,13 +630,13 @@ END:VCALENDAR`;
             const valentinesYear = currentYear + 1; // Next Valentine's Day
             
             // Update event details with next Valentine's date
-            eventDetails.startTime = `${valentinesYear}-02-14T19:00:00`;
+            eventDetails.startTime = `${valentinesYear}-02-14T17:00:00`;
             eventDetails.endTime = `${valentinesYear}-02-14T23:00:00`;
             
             // Update the displayed date
             document.querySelector('.event-detail:nth-child(2)').innerHTML = 
                 `<i class="fas fa-clock"></i>
-                <strong>Date & Time:</strong> February 14, ${valentinesYear} at 7:00 PM`;
+                <strong>Date & Time:</strong> February 14, ${valentinesYear} at 5:00 PM`;
         });
     </script>
 </body>
