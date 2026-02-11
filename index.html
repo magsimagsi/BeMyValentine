@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Will You Be My Valentine Mal?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You Be My Valentine?</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -11,66 +11,52 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        html {
-            height: 100%;
-            overflow-x: hidden;
         }
         
         body {
             background: linear-gradient(135deg, #ffafbd, #ffc3a0);
             min-height: 100vh;
-            min-height: -webkit-fill-available;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 15px;
+            padding: 20px;
             color: #5a3d5c;
-            overflow-x: hidden;
         }
         
-        /* Container adjustments for mobile */
         .container {
+            max-width: 900px;
             width: 100%;
-            max-width: 500px;
             background-color: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
             overflow: hidden;
             position: relative;
-            margin: 0 auto;
         }
         
-        /* Header mobile optimization */
         .header {
             background: linear-gradient(to right, #ff7eb3, #ff758c);
-            padding: 25px 20px;
+            padding: 30px;
             text-align: center;
             color: white;
             position: relative;
         }
         
         .header h1 {
-            font-size: clamp(1.8rem, 6vw, 2.5rem);
-            margin-bottom: 8px;
+            font-size: 2.8rem;
+            margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            line-height: 1.2;
-            padding: 0 10px;
         }
         
         .header p {
-            font-size: clamp(1rem, 4vw, 1.1rem);
+            font-size: 1.2rem;
             opacity: 0.9;
-            padding: 0 10px;
         }
         
         .heart-icon {
             position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 1.8rem;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
             color: rgba(255, 255, 255, 0.7);
             animation: heartbeat 1.5s infinite;
         }
@@ -81,214 +67,215 @@
             100% { transform: scale(1); }
         }
         
-        /* Content area optimization */
         .content {
-            padding: 30px 20px;
+            padding: 40px;
             text-align: center;
         }
         
         .message {
-            font-size: clamp(1rem, 4vw, 1.2rem);
-            line-height: 1.5;
-            margin-bottom: 25px;
-            padding: 0 5px;
-        }
-        
-        .message p {
-            margin-bottom: 15px;
-        }
-        
-        .question {
-            font-size: clamp(1.6rem, 7vw, 2rem);
-            font-weight: bold;
-            color: #ff758c;
-            margin: 25px 0;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-            line-height: 1.3;
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
             padding: 0 10px;
         }
         
-        /* Button mobile optimization */
+        .question {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: #ff758c;
+            margin: 30px 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
         .buttons {
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            margin-top: 35px;
-            width: 100%;
-            position: relative;
-            min-height: 150px;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+            flex-wrap: wrap;
         }
         
         .btn {
-            padding: 18px 30px;
-            font-size: clamp(1.1rem, 4.5vw, 1.3rem);
+            padding: 18px 40px;
+            font-size: 1.4rem;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: bold;
-            width: 100%;
-            max-width: 280px;
+            min-width: 160px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            touch-action: manipulation;
-            position: relative;
-            z-index: 2;
         }
         
         .yes-btn {
             background: linear-gradient(to right, #36d1dc, #5b86e5);
             color: white;
-            z-index: 3;
         }
         
         .no-btn {
             background: linear-gradient(to right, #ff7e5f, #feb47b);
             color: white;
-            position: absolute;
-            z-index: 1;
         }
         
         .calendar-btn {
-            background: linear-gradient(to right, #9C27B0, #E91E63);
+            background: linear-gradient(to right, #7b4397, #dc2430);
             color: white;
-            margin-top: 15px;
+            margin-top: 20px;
             display: none;
         }
         
-        .btn:active {
-            transform: translateY(-2px) scale(0.98);
-            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.15);
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
         }
         
-        .yes-btn:active {
+        .yes-btn:hover {
             background: linear-gradient(to right, #2ab7c0, #4a74d4);
         }
         
-        .no-btn:active {
+        .no-btn:hover {
             background: linear-gradient(to right, #e56a4a, #f0a06c);
         }
         
-        .calendar-btn:active {
-            background: linear-gradient(to right, #7B1FA2, #C2185B);
+        .calendar-btn:hover {
+            background: linear-gradient(to right, #6a3093, #c21d28);
         }
         
-        /* Response area */
         .response {
-            margin-top: 30px;
-            font-size: clamp(1.3rem, 5vw, 1.6rem);
+            margin-top: 40px;
+            font-size: 1.8rem;
             font-weight: bold;
             color: #ff4081;
-            min-height: 50px;
+            min-height: 60px;
             opacity: 0;
-            transition: opacity 0.8s ease;
-            padding: 0 10px;
-            line-height: 1.3;
+            transition: opacity 1s ease;
         }
         
         .response.show {
             opacity: 1;
         }
         
-        /* Calendar info box */
-        .calendar-info {
-            background: linear-gradient(to right, #f8f9ff, #f0f2ff);
+        .calendar-section {
+            margin-top: 30px;
+            padding: 25px;
+            background-color: #f9f7ff;
             border-radius: 15px;
-            padding: 20px;
-            margin: 25px 0;
-            border-left: 5px solid #9C27B0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             display: none;
             text-align: left;
+            border-left: 5px solid #7b4397;
         }
         
-        .calendar-info.show {
+        .calendar-section.show {
             display: block;
             animation: fadeIn 0.8s ease;
         }
         
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .calendar-info h3 {
-            color: #9C27B0;
-            margin-bottom: 10px;
-            font-size: 1.3rem;
+        .calendar-section h3 {
+            color: #7b4397;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
             display: flex;
             align-items: center;
             gap: 10px;
         }
         
-        .calendar-info p {
-            margin-bottom: 15px;
-            color: #555;
+        .calendar-section p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
             line-height: 1.5;
         }
         
-        .calendar-details {
-            background-color: white;
+        .event-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .event-detail {
             padding: 15px;
+            background-color: white;
             border-radius: 10px;
-            margin-top: 15px;
-            border: 1px solid #e0e0e0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
         }
         
-        .calendar-detail {
-            display: flex;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        
-        .calendar-detail:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
-        }
-        
-        .detail-icon {
-            color: #9C27B0;
-            width: 30px;
+        .event-detail i {
+            color: #ff758c;
+            margin-right: 10px;
             font-size: 1.2rem;
         }
         
-        .detail-text {
-            flex: 1;
+        .calendar-providers {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
         }
         
-        .detail-text strong {
-            color: #333;
-            display: block;
-            margin-bottom: 3px;
+        .calendar-provider-btn {
+            padding: 12px 25px;
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #555;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .detail-text span {
-            color: #666;
-            font-size: 0.95rem;
+        .calendar-provider-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        /* No button messages */
-        .no-button-message {
-            color: #ff7e5f;
-            font-weight: bold;
-            margin-top: 10px;
-            font-size: 1.1rem;
-            min-height: 30px;
+        .google-cal {
+            border-color: #4285F4;
+            color: #4285F4;
         }
         
-        /* Hearts container */
+        .apple-cal {
+            border-color: #000;
+            color: #000;
+        }
+        
+        .outlook-cal {
+            border-color: #0078D4;
+            color: #0078D4;
+        }
+        
+        .download-cal {
+            border-color: #7b4397;
+            color: #7b4397;
+        }
+        
+        .calendar-instructions {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #777;
+            font-style: italic;
+            text-align: center;
+        }
+        
         .hearts-container {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 25px;
-            padding: 0 10px;
+            gap: 15px;
+            margin-top: 30px;
         }
         
         .heart {
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: #ff4081;
             animation: float 3s infinite ease-in-out;
         }
@@ -305,122 +292,47 @@
         
         @keyframes float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-12px); }
+            50% { transform: translateY(-15px); }
         }
         
-        /* Footer */
         .footer {
             text-align: center;
-            padding: 15px;
+            padding: 20px;
             color: #888;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             border-top: 1px solid #eee;
-            margin-top: 15px;
+            margin-top: 20px;
         }
         
-        /* Mobile-specific adjustments */
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
-                align-items: flex-start;
-                padding-top: 20px;
-                min-height: 100vh;
-                min-height: -webkit-fill-available;
-            }
-            
-            .container {
-                border-radius: 15px;
-            }
-            
-            .header {
-                padding: 20px 15px;
-            }
-            
-            .content {
-                padding: 25px 15px;
-            }
-            
-            .btn {
-                padding: 16px 25px;
-                max-width: 250px;
-            }
-            
-            .heart-icon {
-                font-size: 1.5rem;
-                top: 12px;
-                right: 12px;
-            }
-            
-            .calendar-info {
-                padding: 15px;
-            }
-        }
-        
-        /* Very small screens */
-        @media (max-width: 350px) {
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
             .header h1 {
-                font-size: 1.6rem;
+                font-size: 2.2rem;
             }
             
             .question {
-                font-size: 1.4rem;
+                font-size: 1.8rem;
             }
             
             .btn {
-                padding: 14px 20px;
-                font-size: 1rem;
-            }
-            
-            .response {
+                padding: 15px 30px;
                 font-size: 1.2rem;
-            }
-        }
-        
-        /* Landscape orientation */
-        @media (max-height: 600px) and (orientation: landscape) {
-            body {
-                align-items: flex-start;
-                padding-top: 10px;
-                padding-bottom: 10px;
-            }
-            
-            .container {
-                max-width: 90%;
-            }
-            
-            .header {
-                padding: 15px;
+                min-width: 140px;
             }
             
             .content {
-                padding: 20px 15px;
+                padding: 30px 20px;
             }
             
-            .buttons {
-                flex-direction: row;
+            .calendar-providers {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .calendar-provider-btn {
+                width: 100%;
+                max-width: 250px;
                 justify-content: center;
-                margin-top: 20px;
-            }
-            
-            .btn {
-                max-width: 200px;
-                padding: 12px 20px;
-            }
-        }
-        
-        /* Prevent text selection on buttons */
-        .btn {
-            user-select: none;
-            -webkit-user-select: none;
-        }
-        
-        /* iOS safe area support */
-        @supports (padding: max(0px)) {
-            body {
-                padding-left: max(15px, env(safe-area-inset-left));
-                padding-right: max(15px, env(safe-area-inset-right));
-                padding-top: max(15px, env(safe-area-inset-top));
-                padding-bottom: max(15px, env(safe-area-inset-bottom));
             }
         }
     </style>
@@ -429,7 +341,7 @@
     <div class="container">
         <div class="header">
             <i class="fas fa-heart heart-icon"></i>
-            <h1>Valentine's Day Question</h1>
+            <h1>Valentine's Day Proposal</h1>
             <p>A special invitation just for you ❤️</p>
         </div>
         
@@ -450,49 +362,56 @@
                 <button class="btn no-btn" id="noBtn">
                     <i class="fas fa-times"></i> Maybe later
                 </button>
-                <button class="btn calendar-btn" id="calendarBtn">
-                    <i class="fas fa-calendar-plus"></i> Add to Calendar
-                </button>
-                <div class="no-button-message" id="noButtonMessage"></div>
             </div>
             
-            <div class="calendar-info" id="calendarInfo">
-                <h3><i class="fas fa-calendar-check"></i> Valentine's Day Date Added!</h3>
-                <p>Your Valentine's Day celebration has been scheduled. Click the button above to add it to your calendar.</p>
-                
-                <div class="calendar-details">
-                    <div class="calendar-detail">
-                        <div class="detail-icon"><i class="fas fa-heart"></i></div>
-                        <div class="detail-text">
-                            <strong>Event:</strong>
-                            <span>Valentine's Day Date with Your Special Someone</span>
-                        </div>
-                    </div>
-                    <div class="calendar-detail">
-                        <div class="detail-icon"><i class="fas fa-calendar-day"></i></div>
-                        <div class="detail-text">
-                            <strong>Date:</strong>
-                            <span id="eventDate">February 14, 2024</span>
-                        </div>
-                    </div>
-                    <div class="calendar-detail">
-                        <div class="detail-icon"><i class="fas fa-clock"></i></div>
-                        <div class="detail-text">
-                            <strong>Time:</strong>
-                            <span>7:00 PM - 10:00 PM</span>
-                        </div>
-                    </div>
-                    <div class="calendar-detail">
-                        <div class="detail-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <div class="detail-text">
-                            <strong>Location:</strong>
-                            <span>Romantic dinner at a surprise location!</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <button class="btn calendar-btn" id="calendarBtn">
+                <i class="fas fa-calendar-plus"></i> Save to Calendar
+            </button>
             
             <div class="response" id="responseMessage"></div>
+            
+            <div class="calendar-section" id="calendarSection">
+                <h3><i class="fas fa-calendar-alt"></i> Valentine's Date Details</h3>
+                <p>Save our special Valentine's date to your calendar so you won't forget!</p>
+                
+                <div class="event-details">
+                    <div class="event-detail">
+                        <i class="fas fa-calendar-day"></i>
+                        <strong>Event:</strong> Valentine's Date with Your Special Someone
+                    </div>
+                    <div class="event-detail">
+                        <i class="fas fa-clock"></i>
+                        <strong>Date & Time:</strong> February 14, 2025 at 7:00 PM
+                    </div>
+                    <div class="event-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <strong>Location:</strong> Romantic Dinner at The Starlight Restaurant
+                    </div>
+                    <div class="event-detail">
+                        <i class="fas fa-sticky-note"></i>
+                        <strong>Notes:</strong> Dress code: Semi-formal. Get ready for a magical evening!
+                    </div>
+                </div>
+                
+                <div class="calendar-providers">
+                    <button class="calendar-provider-btn google-cal" id="googleCalBtn">
+                        <i class="fab fa-google"></i> Add to Google Calendar
+                    </button>
+                    <button class="calendar-provider-btn apple-cal" id="appleCalBtn">
+                        <i class="fab fa-apple"></i> Add to Apple Calendar
+                    </button>
+                    <button class="calendar-provider-btn outlook-cal" id="outlookCalBtn">
+                        <i class="fas fa-envelope"></i> Add to Outlook
+                    </button>
+                    <button class="calendar-provider-btn download-cal" id="downloadCalBtn">
+                        <i class="fas fa-download"></i> Download .ics File
+                    </button>
+                </div>
+                
+                <p class="calendar-instructions">
+                    Choose your calendar provider to add this event automatically, or download the .ics file to import manually.
+                </p>
+            </div>
             
             <div class="hearts-container" id="heartsContainer">
                 <!-- Hearts will be added by JavaScript -->
@@ -509,282 +428,188 @@
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
         const calendarBtn = document.getElementById('calendarBtn');
-        const calendarInfo = document.getElementById('calendarInfo');
         const responseMessage = document.getElementById('responseMessage');
         const heartsContainer = document.getElementById('heartsContainer');
-        const eventDateElement = document.getElementById('eventDate');
-        const noButtonMessage = document.getElementById('noButtonMessage');
+        const calendarSection = document.getElementById('calendarSection');
         
-        // Set Valentine's Day date (February 14th of current year)
-        const currentYear = new Date().getFullYear();
-        const valentinesDate = new Date(currentYear, 1, 14); // February is month 1 (0-indexed)
+        // Calendar provider buttons
+        const googleCalBtn = document.getElementById('googleCalBtn');
+        const appleCalBtn = document.getElementById('appleCalBtn');
+        const outlookCalBtn = document.getElementById('outlookCalBtn');
+        const downloadCalBtn = document.getElementById('downloadCalBtn');
         
-        // Format date for display
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        const formattedDate = valentinesDate.toLocaleDateString('en-US', options);
-        eventDateElement.textContent = formattedDate;
+        // Valentine's event details
+        const eventDetails = {
+            title: "Valentine's Date with Your Special Someone",
+            description: "Romantic Valentine's Day dinner. Get ready for a magical evening!",
+            location: "The Starlight Restaurant, 123 Love Lane, Cityville",
+            startTime: "2025-02-14T19:00:00",
+            endTime: "2025-02-14T23:00:00",
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+        };
         
-        // Variables for mobile touch handling
-        let touchStartX = 0;
-        let touchStartY = 0;
-        let noButtonMoved = false;
-        let noButtonAttempts = 0;
-        let noButtonMessages = [
-            "You can't say no to love! 💘",
-            "I'm persistent! Try again! 😊",
-            "My heart is set on you! 💖",
-            "I won't take no for an answer! 💕",
-            "You're my only Valentine! 💓",
-            "Love always finds a way! 💞",
-            "I'm not giving up! 💗",
-            "You're meant to be my Valentine! 💝"
-        ];
+        // Generate .ics file content
+        function generateICSFile() {
+            const startDate = new Date(eventDetails.startTime).toISOString().replace(/-|:|\.\d+/g, '');
+            const endDate = new Date(eventDetails.endTime).toISOString().replace(/-|:|\.\d+/g, '');
+            
+            return `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Valentine's Proposal//Calendar Event
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+SUMMARY:${eventDetails.title}
+DTSTAMP:${new Date().toISOString().replace(/-|:|\.\d+/g, '')}
+DTSTART:${startDate}
+DTEND:${endDate}
+LOCATION:${eventDetails.location}
+DESCRIPTION:${eventDetails.description}
+STATUS:CONFIRMED
+SEQUENCE:0
+BEGIN:VALARM
+TRIGGER:-PT60M
+ACTION:DISPLAY
+DESCRIPTION:Reminder
+END:VALARM
+END:VEVENT
+END:VCALENDAR`;
+        }
+        
+        // Create Google Calendar URL
+        function getGoogleCalendarUrl() {
+            const startTime = new Date(eventDetails.startTime).toISOString().replace(/-|:|\.\d+/g, '').slice(0, -4) + 'Z';
+            const endTime = new Date(eventDetails.endTime).toISOString().replace(/-|:|\.\d+/g, '').slice(0, -4) + 'Z';
+            
+            const params = new URLSearchParams({
+                action: 'TEMPLATE',
+                text: eventDetails.title,
+                dates: `${startTime}/${endTime}`,
+                details: eventDetails.description,
+                location: eventDetails.location,
+                ctz: eventDetails.timezone,
+                trp: 'false'
+            });
+            
+            return `https://calendar.google.com/calendar/render?${params.toString()}`;
+        }
+        
+        // Create download link for .ics file
+        function downloadICSFile() {
+            const icsContent = generateICSFile();
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'Valentines-Date.ics';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            
+            // Show confirmation
+            showCalendarMessage('Calendar event downloaded! You can import it to your calendar app.');
+        }
+        
+        // Show calendar provider message
+        function showCalendarMessage(message) {
+            const oldMessage = responseMessage.textContent;
+            responseMessage.textContent = message;
+            
+            setTimeout(() => {
+                responseMessage.textContent = oldMessage;
+            }, 3000);
+        }
         
         // Yes button click handler
-        yesBtn.addEventListener('click', handleYesClick);
-        yesBtn.addEventListener('touchend', handleYesClick);
-        
-        function handleYesClick(e) {
-            e.preventDefault();
+        yesBtn.addEventListener('click', function() {
             responseMessage.textContent = "Yay! You've made me the happiest person! ❤️🎉";
             responseMessage.classList.add('show');
             
-            // Show calendar information and button
-            calendarInfo.classList.add('show');
-            calendarBtn.style.display = 'block';
-            
-            // Change button text
-            yesBtn.innerHTML = '<i class="fas fa-heart"></i> You said YES!';
-            yesBtn.disabled = true;
-            
-            // Disable the no button interaction but keep it visible
-            noBtn.style.opacity = '0.5';
-            noBtn.style.cursor = 'not-allowed';
-            
-            // Remove all no button event listeners
-            noBtn.replaceWith(noBtn.cloneNode(true));
-            
-            // Add some celebration effects
-            document.querySelector('.header').style.background = 'linear-gradient(to right, #36d1dc, #5b86e5)';
-            document.querySelector('.question').style.color = '#36d1dc';
+            // Show calendar button and section
+            calendarBtn.style.display = 'inline-block';
+            calendarSection.classList.add('show');
             
             // Create floating hearts
             createHearts(20);
             
-            // Vibrate on mobile if supported
-            if (navigator.vibrate) {
-                navigator.vibrate([100, 50, 100]);
-            }
+            // Change button text
+            yesBtn.innerHTML = '<i class="fas fa-heart"></i> You said YES!';
+            yesBtn.disabled = true;
+            noBtn.style.display = 'none';
             
-            // Auto-generate calendar event after a short delay
-            setTimeout(() => {
-                generateCalendarEvent();
-            }, 1500);
-        }
-        
-        // Calendar button click handler
-        calendarBtn.addEventListener('click', downloadCalendarEvent);
-        calendarBtn.addEventListener('touchend', downloadCalendarEvent);
-        
-        // Function to generate and download calendar event
-        function generateCalendarEvent() {
-            // Create the calendar event in iCalendar format
-            const eventName = "Valentine's Day Date ❤️";
-            const eventDescription = "Our special Valentine's Day celebration! Get ready for a romantic evening filled with love and surprises.";
-            const eventLocation = "Romantic dinner at a surprise location!";
-            
-            // Format dates for iCalendar (YYYYMMDDTHHMMSSZ format)
-            const startDate = new Date(currentYear, 1, 14, 19, 0, 0); // Feb 14, 7:00 PM
-            const endDate = new Date(currentYear, 1, 14, 22, 0, 0);   // Feb 14, 10:00 PM
-            
-            // Convert to UTC and format
-            const formatDateForICS = (date) => {
-                return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-            };
-            
-            const start = formatDateForICS(startDate);
-            const end = formatDateForICS(endDate);
-            const now = formatDateForICS(new Date());
-            
-            // Generate unique ID
-            const uid = `${now}@valentines-date.com`;
-            
-            // Create the iCalendar content
-            const icsContent = [
-                'BEGIN:VCALENDAR',
-                'VERSION:2.0',
-                'PRODID:-//Valentine\'s Day//EN',
-                'CALSCALE:GREGORIAN',
-                'BEGIN:VEVENT',
-                `UID:${uid}`,
-                `DTSTAMP:${now}`,
-                `DTSTART:${start}`,
-                `DTEND:${end}`,
-                `SUMMARY:${eventName}`,
-                `DESCRIPTION:${eventDescription}`,
-                `LOCATION:${eventLocation}`,
-                'STATUS:CONFIRMED',
-                'SEQUENCE:0',
-                'BEGIN:VALARM',
-                'TRIGGER:-PT1H',
-                'ACTION:DISPLAY',
-                'DESCRIPTION:Reminder',
-                'END:VALARM',
-                'END:VEVENT',
-                'END:VCALENDAR'
-            ].join('\r\n');
-            
-            // Store the ICS content for download
-            window.valentinesEventICS = icsContent;
-            
-            // Update calendar button text
-            calendarBtn.innerHTML = '<i class="fas fa-calendar-plus"></i> Add to Calendar (Ready!)';
-            
-            // Show a tooltip or message about the calendar event
-            responseMessage.innerHTML += '<br><small style="font-size: 1rem;">Calendar event generated! Click the purple button to add it.</small>';
-        }
-        
-        // Function to trigger calendar download
-        function downloadCalendarEvent(e) {
-            if (e) e.preventDefault();
-            
-            if (!window.valentinesEventICS) {
-                generateCalendarEvent();
-                return;
-            }
-            
-            // Create a Blob with the ICS content
-            const blob = new Blob([window.valentinesEventICS], { type: 'text/calendar;charset=utf-8' });
-            
-            // Create a download link
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = `valentines-date-${currentYear}.ics`;
-            
-            // Append to body, click, and remove
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            // Update button to show success
-            calendarBtn.innerHTML = '<i class="fas fa-check-circle"></i> Added to Calendar!';
-            calendarBtn.style.background = 'linear-gradient(to right, #4CAF50, #2E7D32)';
-            calendarBtn.disabled = true;
-            
-            // Show success message
-            responseMessage.innerHTML = 'Perfect! Our Valentine\'s Day date is officially on the calendar! 📅❤️<br>';
-            responseMessage.innerHTML += '<small style="font-size: 1rem;">Check your calendar app for the event details.</small>';
-            
-            // Create more celebration hearts
-            createHearts(15);
-            
-            // Vibrate on mobile if supported
-            if (navigator.vibrate) {
-                navigator.vibrate([50, 30, 50, 30, 100]);
-            }
-        }
-        
-        // No button touch handlers for mobile - MOVES BUTTON INSTEAD OF CLICKING
-        noBtn.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            touchStartX = e.touches[0].clientX;
-            touchStartY = e.touches[0].clientY;
-            noButtonMoved = false;
-        }, {passive: false});
-        
-        noBtn.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-            if (!noButtonMoved) {
-                // Move the button to a random position
-                moveNoButton();
-                noButtonMoved = true;
-                showNoButtonMessage();
-            }
-        }, {passive: false});
-        
-        noBtn.addEventListener('touchend', function(e) {
-            e.preventDefault();
-            if (!noButtonMoved) {
-                // If the button wasn't moved, move it anyway
-                moveNoButton();
-                showNoButtonMessage();
-            }
-        }, {passive: false});
-        
-        // No button mouse handlers for desktop - MOVES BUTTON INSTEAD OF CLICKING
-        noBtn.addEventListener('mouseenter', function(e) {
-            e.preventDefault();
-            moveNoButton();
-            showNoButtonMessage();
+            // Add some celebration effects
+            document.querySelector('.header').style.background = 'linear-gradient(to right, #36d1dc, #5b86e5)';
+            document.querySelector('.question').style.color = '#36d1dc';
         });
         
-        noBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            moveNoButton();
-            showNoButtonMessage();
-            return false;
-        });
-        
-        // Function to show funny message when trying to click "no"
-        function showNoButtonMessage() {
-            noButtonAttempts++;
+        // No button click handler (with some fun interactivity)
+        noBtn.addEventListener('mouseover', function() {
+            // Move the button to a random position when hovered
+            const maxX = window.innerWidth - noBtn.offsetWidth - 40;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 40;
             
-            // Cycle through messages
-            const messageIndex = (noButtonAttempts - 1) % noButtonMessages.length;
-            noButtonMessage.textContent = noButtonMessages[messageIndex];
-            noButtonMessage.style.opacity = '1';
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
             
-            // Make the message fade out after 2 seconds
-            setTimeout(() => {
-                noButtonMessage.style.opacity = '0';
-                setTimeout(() => {
-                    if (noButtonMessage.style.opacity === '0') {
-                        noButtonMessage.textContent = '';
-                    }
-                }, 500);
-            }, 2000);
-            
-            // Create some hearts when trying to click no
-            createHearts(3);
-            
-            // Vibrate on mobile if supported
-            if (navigator.vibrate) {
-                navigator.vibrate(30);
-            }
-        }
-        
-        function moveNoButton() {
-            // Calculate safe area for button placement (considering mobile viewport)
-            const headerHeight = document.querySelector('.header').offsetHeight;
-            const containerHeight = document.querySelector('.container').offsetHeight;
-            const buttonsArea = document.querySelector('.buttons').getBoundingClientRect();
-            
-            // Calculate boundaries within the buttons area
-            const minX = 20;
-            const maxX = buttonsArea.width - noBtn.offsetWidth - 20;
-            const minY = 0;
-            const maxY = buttonsArea.height - noBtn.offsetHeight - 20;
-            
-            // Generate random position within boundaries
-            const randomX = Math.floor(Math.random() * maxX) + minX;
-            const randomY = Math.floor(Math.random() * maxY) + minY;
-            
-            // Apply the new position
-            noBtn.style.position = 'absolute';
+            noBtn.style.position = 'fixed';
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
-            noBtn.style.zIndex = '1';
+        });
+        
+        noBtn.addEventListener('click', function() {
+            responseMessage.textContent = "I'm not giving up that easily! 💪❤️";
+            responseMessage.classList.add('show');
             
-            // Add a small vibration on mobile
-            if (navigator.vibrate) {
-                navigator.vibrate(50);
-            }
-        }
+            // Create some hearts anyway
+            createHearts(10);
+            
+            // Change the button text
+            noBtn.textContent = "Are you sure?";
+        });
+        
+        // Calendar button click handler
+        calendarBtn.addEventListener('click', function() {
+            // Scroll to calendar section
+            calendarSection.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Calendar provider button handlers
+        googleCalBtn.addEventListener('click', function() {
+            window.open(getGoogleCalendarUrl(), '_blank');
+            showCalendarMessage('Opening Google Calendar...');
+        });
+        
+        appleCalBtn.addEventListener('click', function() {
+            // For Apple Calendar, we download the .ics file
+            downloadICSFile();
+            showCalendarMessage('Downloading .ics file for Apple Calendar...');
+        });
+        
+        outlookCalBtn.addEventListener('click', function() {
+            // Outlook web calendar URL
+            const outlookParams = new URLSearchParams({
+                rru: 'addevent',
+                startdt: eventDetails.startTime,
+                enddt: eventDetails.endTime,
+                subject: eventDetails.title,
+                body: eventDetails.description,
+                location: eventDetails.location
+            });
+            
+            window.open(`https://outlook.live.com/calendar/0/deeplink/compose?${outlookParams.toString()}`, '_blank');
+            showCalendarMessage('Opening Outlook Calendar...');
+        });
+        
+        downloadCalBtn.addEventListener('click', function() {
+            downloadICSFile();
+        });
         
         // Function to create floating hearts
         function createHearts(count) {
-            // Don't clear existing hearts, just add more
+            // Clear existing hearts
+            heartsContainer.innerHTML = '';
+            
+            // Create new hearts
             for (let i = 0; i < count; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
@@ -798,45 +623,26 @@
                 heart.style.animationDelay = `${delay}s`;
                 
                 heartsContainer.appendChild(heart);
-                
-                // Remove heart after animation completes
-                setTimeout(() => {
-                    if (heart.parentNode) {
-                        heart.style.opacity = '0';
-                        heart.style.transition = 'opacity 1s';
-                        setTimeout(() => {
-                            if (heart.parentNode) {
-                                heart.parentNode.removeChild(heart);
-                            }
-                        }, 1000);
-                    }
-                }, 5000);
             }
         }
         
         // Create some initial hearts
         window.addEventListener('load', function() {
-            createHearts(6);
+            createHearts(8);
             
-            // Initial position for no button
-            setTimeout(() => {
-                moveNoButton();
-            }, 100);
+            // Set current year for Valentine's date
+            const currentYear = new Date().getFullYear();
+            const valentinesYear = currentYear + 1; // Next Valentine's Day
             
-            // Handle orientation change
-            window.addEventListener('orientationchange', function() {
-                // Small timeout to allow orientation to complete
-                setTimeout(() => {
-                    createHearts(3);
-                    moveNoButton();
-                }, 300);
-            });
+            // Update event details with next Valentine's date
+            eventDetails.startTime = `${valentinesYear}-02-14T19:00:00`;
+            eventDetails.endTime = `${valentinesYear}-02-14T23:00:00`;
+            
+            // Update the displayed date
+            document.querySelector('.event-detail:nth-child(2)').innerHTML = 
+                `<i class="fas fa-clock"></i>
+                <strong>Date & Time:</strong> February 14, ${valentinesYear} at 7:00 PM`;
         });
-        
-        // Prevent context menu on buttons for mobile
-        yesBtn.addEventListener('contextmenu', e => e.preventDefault());
-        noBtn.addEventListener('contextmenu', e => e.preventDefault());
-        calendarBtn.addEventListener('contextmenu', e => e.preventDefault());
     </script>
 </body>
 </html>
